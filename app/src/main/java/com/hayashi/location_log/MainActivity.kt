@@ -8,8 +8,12 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.Menu
 import android.view.MenuItem
+import com.hayashi.location_log.utility.MyLog
+import com.hayashi.location_log.utility.Text
 
 class MainActivity : AppCompatActivity() {
+
+    private val l = MyLog("----")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+        start()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,5 +46,11 @@ class MainActivity : AppCompatActivity() {
             true
         } else super.onOptionsItemSelected(item)
 
+    }
+
+    private fun start() {
+        l.d("MapsActivity")
+        LocationListenerImpl.text = Text("location_log.csv", this)
+        LocationStarter.start(this)
     }
 }
