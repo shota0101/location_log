@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         if (this.textView == null)
             this.textView = findViewById(R.id.text_view)
         this.textView?.let {
-            setText(text)
+            it.text = text
         }
     }
 }
