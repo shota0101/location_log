@@ -3,6 +3,7 @@ package com.hayashi.location_log
 import android.location.Location
 import android.location.LocationListener
 import android.os.Bundle
+import android.widget.TextView
 import com.hayashi.location_log.LocationStarter.locationProvider
 import com.hayashi.location_log.extensions.toCSV
 import com.hayashi.location_log.utility.MyLog
@@ -12,6 +13,7 @@ import java.util.*
 object LocationListenerImpl : LocationListener {
     private val l = MyLog("----")
     var text: Text? = null
+    var activity: MainActivity? = null
 
     // ロケーションプロバイダが利用可能になるとコールバックされるメソッド
     override fun onProviderEnabled(provider: String) {
@@ -24,6 +26,9 @@ object LocationListenerImpl : LocationListener {
         l.d("onLocationChanged called : location = $location")
         text?.let {
             it.append("${Date()},${location.toCSV()}\n")
+        }
+        activity?.let {
+            it.setText(Date().toString())
         }
     }
 

@@ -10,10 +10,14 @@ import android.view.Menu
 import android.view.MenuItem
 import com.hayashi.location_log.utility.MyLog
 import com.hayashi.location_log.utility.Text
+import android.widget.TextView
+
+
 
 class MainActivity : AppCompatActivity() {
 
     private val l = MyLog("----")
+    private var textView: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +54,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun start() {
         l.d("MapsActivity")
+        LocationListenerImpl.activity = this
         LocationListenerImpl.text = Text("location_log.csv", this)
         LocationStarter.start(this)
+    }
+
+    fun setText(text: String) {
+        if (this.textView == null)
+            this.textView = findViewById(R.id.text_view)
+        this.textView?.let {
+            setText(text)
+        }
     }
 }
