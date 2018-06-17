@@ -5,13 +5,13 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import com.hayashi.location_log.utility.MyLog
 import com.hayashi.location_log.utility.Text
-import android.widget.TextView
-
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        addRap()
+
         val id = item.itemId
-
-
         return if (id == R.id.action_settings) {
             true
         } else super.onOptionsItemSelected(item)
@@ -64,6 +64,12 @@ class MainActivity : AppCompatActivity() {
             this.textView = findViewById(R.id.text_view)
         this.textView?.let {
             it.text = text
+        }
+    }
+
+    fun addRap() {
+        LocationListenerImpl.text?.let {
+            it.append("${Date()},rap\n")
         }
     }
 }
